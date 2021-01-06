@@ -11,9 +11,9 @@ import ar.com.mipagina.turneroweb.modelo.Categoria;
 
 @Repository
 public interface CategoriaRepositorio extends JpaRepository<Categoria, Integer>{
-	List<Categoria> findByNombreContainingIgnoreCaseAndDescripcionContainingIgnoreCase(String nombre, String descripcion);
+	Page<Categoria> findByNombreContainingIgnoreCaseAndDescripcionContainingIgnoreCase(String nombre, String descripcion, Pageable pagina);
 	
-	List<Categoria> findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(String nombre, String descripcion);
+	Page<Categoria> findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(String nombre, String descripcion, Pageable pagina);
 	
 	Page<Categoria> findByNombreContainingIgnoreCase(String nombre, Pageable pagina);
 	

@@ -21,13 +21,13 @@ public class CategoriaServicio {
 		return repositorio.findAll();
 	}
 	
-	public List<Categoria> listarTodosFiltradoPorNombreYDescripcion(String nombre, String descripcion) {
-		return repositorio.findByNombreContainingIgnoreCaseAndDescripcionContainingIgnoreCase(nombre, descripcion);
+	public Page<Categoria> listarTodosFiltradoPorNombreYDescripcion(String nombre, String descripcion, Pageable pagina) {
+		return repositorio.findByNombreContainingIgnoreCaseAndDescripcionContainingIgnoreCase(nombre, descripcion, pagina);
 	}
 	
 
-	public List<Categoria> listarTodosFiltradoPorNombreODescripcion(String nombre, String descripcion) {
-		return repositorio.findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(nombre, descripcion);
+	public Page<Categoria> listarTodosFiltradoPorNombreODescripcion(String nombre, String descripcion, Pageable pagina) {
+		return repositorio.findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(nombre, descripcion, pagina);
 	}
 	
 	public Page<Categoria> listarTodosFiltradosPorNombre(String nombre, Pageable pagina) {
@@ -47,9 +47,11 @@ public class CategoriaServicio {
 		return repositorio.save(c);
 	}
 
-	public Categoria actualizar(Categoria c) {
+	public Categoria actualizar(Categoria c, Integer id) {
 		if (c.getId() == null) {
 			throw new RuntimeException("Error: El objeto no tiene id.");
+		} else if (c.getId() != id) {
+			throw new RuntimeException("Error: El id del objeto no coincide con el id proporcionado.");
 		}
 		
 		return repositorio.save(c);
